@@ -12,16 +12,29 @@
 		li $a1, 1001 #allocating byte space for string to be stored
 		syscall #executing command
 		
-		addi $t7,$t7,0      #initializing my counter
-		addi $t6,$t6,1      #1: continues loopiing, 0: haults the loop
+		addi $t7,$t7,0      #initialize counter
+		addi $t6,$t6,1      #1: continues looping
 		addi $t5,$t5,1      #exponent of base 33
-		addi $t4,$t4,0      #length of my string
+		addi $t4,$t4,0      #length string
 		
 		#remove Spaces
 
 		jal string_len #First I'll need to figure out the lenght of my string.
 		li $t7,0            #setting my counter to 0
 		subu $t7,$t4,1
+		
+	Spaces:
+		li $t3, 0
+		addu $t3,$t3,$t7                           #$t0 = x
+		addu $t3,$t3,$a1                           #$t0 = $a1 at position x
+		lbu $a2,0($t3)                             #load $t0 to $a2
+		bgt $a2,32,end_Spaces                      #if a2 is greater than 32, jump to end_space
+		subu $t7,$t7,1                             #decrement by 1
+		j Spaces                              #starts the loop 
+		
+	end_Spaces:   
+		jal constants                #jump to constants
+
 		
 		
 
