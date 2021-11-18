@@ -71,6 +71,38 @@
 		j count                           #restarts my count loop
 	exit: 
 		jr $ra
+	constants:
+
+		li $t0, 87                   # subtract 87 from my lowercse letters
+		li $t1,55                    # subtract 55 from my upper case letters
+		li $t2,48                    # subtract 48 from the value of my numbers
+		li $t6, 0                    #string length.
+
+		li $t8,33                    #base 33
+	calcuate:
+
+		li $t3,0
+
+		addu $t3, $t3, $t7          #adds x to t3
+		addu $t3, $t3, $a1          #t3 = a[x]
+		lbu $a2, ($t3)              #load ascii value of $t3 to $a2
+
+		bltz $t3,End                #If position x is less than 0
+		ble $a2,32,choice         #If a2 <= 32 jump to choice
+		beq $t6,4, OOR       #If $t6 is 4 then it is OOR.
+
+		bgt $a2,119,OOR      #if a2 is larger than 119 it is not in my base system
+
+		bge $a2,97, S_L   #if a2 is less than 119 and more than 97 go to S_L function
+
+		bgt $a2,87, OOR
+		bge $a2,65, S_U  #If a2 is less han 87 and more than 65 got to S_U
+
+		bge $a2,57,OOR
+		bge $a2,48,num  #If a2 is less than 57 and more than 48 jump to num.
+
+		j OOR               #If a2 is less than 48 jump to OOR
+
 
 		
 		
