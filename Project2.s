@@ -33,7 +33,7 @@
 		j Spaces                              #starts the loop 
 		
 	end_Spaces:   
-		jal constants                #jump to constants
+		jal const              #jump to constants
 		
 		li $a2,0                #resetting my temp register
 		addu $a2,$a2,$a0        #Putting my sum into a2
@@ -65,13 +65,13 @@
 		addu $t3,$t3,$t7                  #my iterator
 		addu $t3,$t3,$a1                  # position in my string
 		lbu $a2,($t3)                     #loads position to $a2
-		beq $a2,0,exit                    #check for a NULL value
+		beq $a2,0,leave                   #check for a NULL value
 		addi $t7,$t7,1                    #increment my iterator by 1
-		addi $t4,$t4,1                    #increaseing the value of my string length
-		j count                           #restarts my count loop
-	exit: 
+		addi $t4,$t4,1                    #increaseing the value of string length
+		j count                           #loop
+	leave: 
 		jr $ra
-	constants:
+	const:
 
 		li $t0, 87                   # subtract 87 from my lowercse letters
 		li $t1,55                    # subtract 55 from my upper case letters
@@ -131,8 +131,8 @@
 		j Invalid       #Prints invalid
 		
 	choice:
-		beq $t6, 4, EndProgram      #when the end is reached ends program
-		j OutofRange                #if it doesnt reach the end jump to out of range
+		beq $t6, 4, End     # ends program
+		j OOR                # jump to OOR
 
 	End: 
 		jr $ra
