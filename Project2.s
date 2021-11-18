@@ -7,9 +7,12 @@
   .text
 # N = 33, M = 23 which is W
 	main:
-		li $v0, 4   #Command to print a string
-		la $a0, userInput   #Loading the string into the argument to enable printing
+		li $v0, 8 #Command to read a string
+		la $a0, buffer #storing space for the string
+		li $a1, 1001 #allocating byte space for string to be stored
 		syscall #executing command
+		
+		
 
 		
 
