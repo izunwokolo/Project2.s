@@ -42,6 +42,20 @@
 		li $a0,0
 		la $a0, ans        #print output
 		syscall                 
+	error:
+
+		li $v0,4                        #print string
+		li $a0,0                        #a0 = 0
+		la $a0, ans                #loads answer
+		syscall                         #executes
+
+		li $v0,4
+		li $a0,0
+		la $a0, mistake                #Loads mistake 
+		syscall
+
+		li $v0, 10
+		syscall                         #terminates Program
 
 		
 		
