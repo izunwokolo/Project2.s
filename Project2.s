@@ -34,6 +34,14 @@
 		
 	end_Spaces:   
 		jal constants                #jump to constants
+		
+		li $a2,0                #resetting my temp register
+		addu $a2,$a2,$a0        #Putting my sum into a2
+
+		li $v0,4
+		li $a0,0
+		la $a0, ans        #print output
+		syscall                 
 
 		
 		
