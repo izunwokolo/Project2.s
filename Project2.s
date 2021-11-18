@@ -57,6 +57,21 @@
 		li $v0, 10
 		syscall                         #terminates Program
 
+	string_len:
+		li $t4,0                          #setting the intital value of my string's length to 0 string length
+		
+	count: 
+		li $t3,0
+		addu $t3,$t3,$t7                  #my iterator
+		addu $t3,$t3,$a1                  # position in my string
+		lbu $a2,($t3)                     #loads position to $a2
+		beq $a2,0,exit                    #check for a NULL value
+		addi $t7,$t7,1                    #increment my iterator by 1
+		addi $t4,$t4,1                    #increaseing the value of my string length
+		j count                           #restarts my count loop
+	exit: 
+		jr $ra
+
 		
 		
 
