@@ -12,6 +12,11 @@
 		li $a1, 1001 #allocating byte space for string to be stored
 		syscall #executing command
 		
+		addi $t7,$t7,0      #initializing my counter
+		addi $t6,$t6,1      #1: continues loopiing, 0: haults the loop
+		addi $t5,$t5,1      #exponent of base 33
+		addi $t4,$t4,0      #length of my string
+		
 		
 
 		
