@@ -96,14 +96,46 @@
 		bge $a2,97, S_L   #if a2 is less than 119 and more than 97 go to S_L function
 
 		bgt $a2,87, OOR
-		bge $a2,65, S_U  #If a2 is less han 87 and more than 65 got to S_U
+		bge $a2,65, S_U  #go to S_U
 
 		bge $a2,57,OOR
 		bge $a2,48,num  #If a2 is less than 57 and more than 48 jump to num.
 
 		j OOR               #If a2 is less than 48 jump to OOR
+		
+	S_U:
+		subu $a2,$a2,$t1      #subtract 55 to et the decimal value
+
+	S_L:                  
+		subu $a2,$a2,$t0 #subtract 87 to get the decimal value
 
 
+	num:
+		subu $a2,$a2,$t2       #subtract 48 to get decimal value
+		
+	DoMath:
+		multu $a2,$t5           #Multiplying by 33 raised to my exponent.
+		mflo $a2                    #Stores last math into a2
+
+		addu $a0,$a0,$a2                #adds current summation to my final sum
+		multu $t5,$t8                   #incrementing my exponent
+
+		mflo $t5                        #stores last math into t3
+
+		subu $t7,$t7,1                  #increment x
+		addu $t6,$t6,1                  #increment length
+
+		j calculate                     #starts at the beginning of calculate
+
+	OOR:
+		j Invalid       #Prints invalid
+		
+	choice:
+		beq $t6, 4, EndProgram      #when the end is reached ends program
+		j OutofRange                #if it doesnt reach the end jump to out of range
+
+	End: 
+		jr $ra
 		
 		
 
